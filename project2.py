@@ -21,6 +21,20 @@ def create_order(oId,sId,cId,Odate,Ddate,Amount):
 def create_customer(cId,Cname,Street,City,StateAb,Zipcode):
     return f"CREATE (:CUSTOMER{{cId: '{cId}', Cname: '{Cname}', Street: '{Street}', City: '{City}', StateAb: '{StateAb}', Zipcode: '{Zipcode}'}})"
 
+def create_store(sID,Sname,Street,City,StateAb,ZipCode,Sdate,Telno,URL):
+    return f"CREATE(:STORE{{sID: '{sID}', Sname: '{Sname}', Street: '{Street}' City: '{City}', StateAb: '{StateAb}', ZipCode '{ZipCode}', Sdate: '{Sdate}', Telno: '{Telno}', URL: '{URL}'}})"
+
+def create_order_item(oId, iId, Icount):
+    return f"CREATE (:ORDER_ITEM{{oId: '{oId}', iId: '{iId}', Icount: '{Icount}'}})"
+
+def create_oldprice(iId, Sprice, Sdate, Edate):
+    return f"CREATE(:OLDPRICE{{iId: '{iId}', Sprice: '{Sprice}', Sdate: '{Sdate}', Edate: '{Edate}'}})"
+
+def create_employee(sId,SSN,Sname,Street,City,StateAb,Zipcode,Etype,Bdate,Sdate,Edate,Level,Asalary,Agency,Hsalary,Institute,Itype):
+    return f"CREATE(:EMPLOYEE{{sId: '{sId}', SSN: '{SSN}' Sname: '{Sname}', Street: '{Street}', City: '{City}', Bdate: '{Bdate}', StateAb: '{StateAb}', Zipcode: '{Zipcode}', Etype: '{Etype}', Sdate: '{Sdate}', Edate: '{Edate}', Level: '{Level}', Asalary: '{Asalary}', Agency: '{Agency}', Hsalary: '{Hsalary}', Institute: '{Institute}', Itype: '{Itype}'}})"
+
+def create_contract(vId,ctId,Sdate,Ctime,Cname):
+    return f"CREATE(:CONTRACT{{vId: '{vId}', ctId: '{ctId}', Sdate: '{Sdate}', Ctime: '{Ctime}', Cname: '{Cname}'}})"
 
 # Sandbox info (can replace with your own)
 driver = GraphDatabase.driver(
