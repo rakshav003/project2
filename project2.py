@@ -79,7 +79,41 @@ with driver.session(database="neo4j") as session:
             query = create_customer(cId,Cname,Street,City,StateAb,Zipcode)
             session.run(query)
             
-                   
+    with open("Sprouts Data/STORE.csv") as store_file:
+        next(store_file)
+        for line in store_file:
+            sID,Sname,Street,City,StateAb,ZipCode,Sdate,Telno,URL = line.strip().split(',')
+            query = create_store(sID,Sname,Street,City,StateAb,ZipCode,Sdate,Telno,URL)
+            session.run(query)   
+
+    with open("Sprouts Data/ORDER_ITEM.csv") as order_item_file:
+        next(order_item_file)
+        for line in order_item_file:
+            oId, iId, Icoun = line.strip().split(',')
+            query = create_order_item(oId, iId, Icoun)
+            session.run(query)     
+
+    with open("Sprouts Data/OLDPRICE.csv") as olderprice_file:
+        next(olderprice_file)
+        for line in olderprice_file:
+            iId, Sprice, Sdate, Edate = line.strip().split(',')
+            query = create_oldprice(iId, Sprice, Sdate, Edate)
+            session.run(query)  
+
+    with open("Sprouts Data/EMPLOYEE.csv") as employee_file:
+        next(employee_file)
+        for line in employee_file:
+            sId,SSN,Sname,Street,City,StateAb,Zipcode,Etype,Bdate,Sdate,Edate,Level,Asalary,Agency,Hsalary,Institute,Itype = line.strip().split(',')
+            query = create_employee(sId,SSN,Sname,Street,City,StateAb,Zipcode,Etype,Bdate,Sdate,Edate,Level,Asalary,Agency,Hsalary,Institute,Itype)
+            session.run(query)
+
+    with open("Sprouts Data/CONTRACT.csv") as contract_file:
+        next(contract_file)
+        for line in contract_file:
+            vId,ctId,Sdate,Ctime,Cname = line.strip().split(',')
+            query = create_contract(vId,ctId,Sdate,Ctime,Cname)
+            session.run(query)
+
     # VENDOR SELLS ITEM 
     sells_query = '''
     MATCH (v:VENDOR), (vi:VENDOR_ITEM), (i:ITEM)
