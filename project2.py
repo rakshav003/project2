@@ -21,13 +21,13 @@ def create_order(oId,sId,cId,Odate,Ddate,Amount):
 def create_customer(cId,Cname,Street,City,StateAb,Zipcode):
     return f"CREATE (:CUSTOMER{{cId: '{cId}', Cname: '{Cname}', Street: '{Street}', City: '{City}', StateAb: '{StateAb}', Zipcode: '{Zipcode}'}})"
 
-def create_store(sID,Sname,Street,City,StateAb,ZipCode,Sdate,Telno,URL):
-    return f"CREATE(:STORE{{sID: '{sID}', Sname: '{Sname}', Street: '{Street}' City: '{City}', StateAb: '{StateAb}', ZipCode '{ZipCode}', Sdate: '{Sdate}', Telno: '{Telno}', URL: '{URL}'}})"
+def create_store(sId,Sname,Street,City,StateAb,ZipCode,Sdate,Telno,URL):
+    return f"CREATE(:STORE{{sId: '{sId}', Sname: '{Sname}', Street: '{Street}' City: '{City}', StateAb: '{StateAb}', ZipCode '{ZipCode}', Sdate: '{Sdate}', Telno: '{Telno}', URL: '{URL}'}})"
 
-def create_order_item(oId, iId, Icount):
+def create_order_item(oId,iId,Icount):
     return f"CREATE (:ORDER_ITEM{{oId: '{oId}', iId: '{iId}', Icount: '{Icount}'}})"
 
-def create_oldprice(iId, Sprice, Sdate, Edate):
+def create_oldprice(iId,Sprice,Sdate,Edate):
     return f"CREATE(:OLDPRICE{{iId: '{iId}', Sprice: '{Sprice}', Sdate: '{Sdate}', Edate: '{Edate}'}})"
 
 def create_employee(sId,SSN,Sname,Street,City,StateAb,Zipcode,Etype,Bdate,Sdate,Edate,Level,Asalary,Agency,Hsalary,Institute,Itype):
@@ -38,8 +38,8 @@ def create_contract(vId,ctId,Sdate,Ctime,Cname):
 
 # Sandbox info (can replace with your own)
 driver = GraphDatabase.driver(
-  "bolt://174.129.159.245:7687",
-  auth=basic_auth("neo4j", "capacities-laser-qualifiers"))
+  "bolt://3.95.5.148:7687",
+  auth=basic_auth("neo4j", "memorandum-beliefs-ice"))
 
 with driver.session(database="neo4j") as session:
     # Open each file and create nodes
@@ -82,8 +82,8 @@ with driver.session(database="neo4j") as session:
     with open("Sprouts Data/STORE.csv") as store_file:
         next(store_file)
         for line in store_file:
-            sID,Sname,Street,City,StateAb,ZipCode,Sdate,Telno,URL = line.strip().split(',')
-            query = create_store(sID,Sname,Street,City,StateAb,ZipCode,Sdate,Telno,URL)
+            sId,Sname,Street,City,StateAb,ZipCode,Sdate,Telno,URL = line.strip().split(',')
+            query = create_store(sId,Sname,Street,City,StateAb,ZipCode,Sdate,Telno,URL)
             session.run(query)   
 
     with open("Sprouts Data/ORDER_ITEM.csv") as order_item_file:
@@ -153,7 +153,7 @@ with driver.session(database="neo4j") as session:
     MERGE (oi)-[:MATHES]->(i)
     '''
     session.run(matches_query)
-    
+
     #Employee WORKS_AT Store
     works_query = '''
     MATCH (e: EMPLOYEE), (s: STORE)
