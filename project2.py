@@ -147,11 +147,19 @@ with driver.session(database="neo4j") as session:
     # session.run(contains_query)
 
     #order_item MATCHES item
-    matches_quary = '''
-    MATCH (oi: ORDER_ITEM), (i:Item)
+    matches_query = '''
+    MATCH (oi: ORDER_ITEM), (i:ITEM)
     WHERE oi.iID = i.iId
     MERGE (oi)-[:MATHES]->(i)
     '''
+    session.run(matches_query)
     
+    #Employee WORKS_AT Store
+    works_query = '''
+    MATCH (e: EMPLOYEE), (s: STORE)
+    WHERE e.sId = s.sId
+    MERGE (e)-[:WORKS_AT]->(s)
+    '''
+    session.run(works_query)
 
 driver.close()
