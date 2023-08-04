@@ -163,6 +163,15 @@ with driver.session(database="neo4j") as session:
     '''
     session.run(works_query)
 
+    #Vendor HAS Contract
+    has_query = '''
+    MATCH (v:VENDOR), (c:CONTRACT)
+    WHERE v.vId = c.vId
+    MERGE (v)-[:HAS]->(c)
+    '''
+
+    session.run(has_query)
+
     #Item HAD Oldprice
     had_query = '''
     MATCH (i:ITEM), (op:OLDPRICE)
