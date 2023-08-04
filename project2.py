@@ -162,6 +162,15 @@ with driver.session(database="neo4j") as session:
     MERGE (e)-[:WORKS_AT]->(s)
     '''
     session.run(works_query)
+
+    #Item HAD Oldprice
+    had_query = '''
+    MATCH (i:ITEM), (op:OLDPRICE)
+    WHERE i.iId = op.iId
+    MERGE (i)-[:HAD]->(op)
+    '''
+
+    session.run(had_query)
        
 
 driver.close()
