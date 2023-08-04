@@ -38,8 +38,8 @@ def create_contract(vId,ctId,Sdate,Ctime,Cname):
 
 # Sandbox info (can replace with your own)
 driver = GraphDatabase.driver(
-  "bolt://3.95.5.148:7687",
-  auth=basic_auth("neo4j", "memorandum-beliefs-ice"))
+  "bolt://52.54.55.209:7687",
+  auth=basic_auth("neo4j", "fives-condenser-pads"))
 
 with driver.session(database="neo4j") as session:
     # Open each file and create nodes
